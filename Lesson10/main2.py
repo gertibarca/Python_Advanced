@@ -15,7 +15,6 @@ class Cat(Animal):
     def make_sound(self):
         print("Meow Meow!")
 
-
 if __name__ == "__main__":
     qeni = Dog()
     maca = Cat()
