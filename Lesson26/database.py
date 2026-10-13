@@ -485,6 +485,24 @@ def get_dashboard_stats():
                 for row in category_rows
             ],
         }
+# =====================================================
+# USER OPERATIONS (Authentication)
+# =====================================================
 
+def create_user(username: str, password_hash: str):
+    with db_session() as connection:
+        cursor = connection.execute(
+            "INSERT INTO users (username, password_hash) VALUES (?, ?)",
+            (username.strip().lower(), password_hash),
+        )
+        return cursor.lastrowid
+
+def read_user_by_username(username: str):
+    with get_connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM users WHERE username = ?",
+            (username.strip().lower(),),
+        ).fetchone()
+        return dict(row) if row else None
 
 create_tables()

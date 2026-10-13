@@ -107,3 +107,15 @@ class DashboardStats(BaseModel):
     average_prep_time: float
     difficulty_counts: dict[str, int]
     category_counts: list[dict]
+
+class UserCreate(BaseModel):
+    username: str = Field(min_length=3, max_length=50)
+    password: str = Field(min_length=6, max_length=100)
+
+class UserResponse(BaseModel):
+    id: int
+    username: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
